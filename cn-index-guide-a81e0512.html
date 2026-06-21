@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>K1体育 · 稳定入口与说明页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f9fc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1a2b3c;
+            padding: 0 1rem 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* hero 区 */
+        .hero {
+            background: linear-gradient(135deg, #d7f0f5 0%, #b6dfe8 100%);
+            border-radius: 2rem;
+            padding: 2.8rem 1.8rem;
+            margin: 2rem 0 2.2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 90, 100, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 180px;
+            height: 180px;
+            background: rgba(0, 130, 140, 0.03);
+            border-radius: 60% 40% 50% 50%;
+            transform: rotate(20deg);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b3b44;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #1f5561;
+            max-width: 580px;
+            margin: 0 auto 1.2rem;
+            opacity: 0.9;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(0, 120, 130, 0.08);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #025f6b;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(0, 150, 160, 0.15);
+        }
+
+        /* 优势卡片 —— 网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0 2.4rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.6rem 1rem 1.4rem;
+            box-shadow: 0 4px 12px rgba(0, 70, 80, 0.04);
+            border-left: 5px solid #1f9aa8;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0, 100, 110, 0.08);
+        }
+
+        .feature-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+            display: block;
+            color: #1b8896;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0b474f;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #3d5b63;
+        }
+
+        /* 说明区 — 双栏卡片 */
+        .info-section {
+            background: #ffffff;
+            border-radius: 1.6rem;
+            padding: 1.8rem 1.6rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 4px 16px rgba(0, 80, 90, 0.04);
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 580;
+            color: #0a414b;
+            border-left: 6px solid #29a2b2;
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-two {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .info-two > div {
+            flex: 1 1 200px;
+        }
+
+        .info-two p {
+            margin-bottom: 0.6rem;
+            font-size: 0.96rem;
+        }
+
+        .info-two strong {
+            color: #136b78;
+        }
+
+        .info-two .highlight {
+            background: #e9f4f7;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            margin-top: 0.4rem;
+        }
+
+        /* FAQ 摘要 (折叠摘要) */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 1.6rem;
+            padding: 1.6rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 4px 12px rgba(0, 80, 90, 0.03);
+        }
+
+        .faq-summary h2 {
+            font-size: 1.4rem;
+            font-weight: 580;
+            color: #0b4d58;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dfedf1;
+            padding: 0.8rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #124f5b;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: #3a5c64;
+            font-size: 0.92rem;
+            margin-top: 0.15rem;
+        }
+
+        .faq-a a {
+            color: #117b8a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 0.5px;
+        }
+
+        /* 底部链接 */
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2rem;
+            margin: 2.6rem 0 0.6rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #dae9ed;
+        }
+
+        .footer-links a {
+            color: #1a6b79;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .footer-links a:hover {
+            border-bottom-color: #2899aa;
+        }
+
+        .copy-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6f8d95;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero .sub {
+                font-size: 1rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+            .info-section {
+                padding: 1.2rem 1rem;
+            }
+            .faq-summary {
+                padding: 1.2rem 1rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 行内链接样式 (与句子中的 a 标签一致) */
+        .inline-link {
+            color: #117b8a;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HERO 区 -->
+    <header class="hero">
+        <h1>K1体育 · 稳定入口</h1>
+        <p class="sub">一份围绕页面说明与使用方式的整理文档，帮助新用户快速了解基础结构与访问路径。</p>
+        <span class="tagline">基于网页结构的轻量说明页</span>
+    </header>
+
+    <!-- 优势区：网格卡片 -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <span class="icon">⚙️</span>
+            <h3>结构清晰</h3>
+            <p>页面分区明确，从入口到 FAQ 均有独立模块，方便对照查阅。</p>
+        </div>
+        <div class="feature-card">
+            <span class="icon">🧩</span>
+            <h3>蓝绿基调</h3>
+            <p>低饱和配色与卡片布局，阅读感受柔和，适合信息整理页。</p>
+        </div>
+        <div class="feature-card">
+            <span class="icon">📱</span>
+            <h3>移动适配</h3>
+            <p>网格自动折行、按钮及间距针对小屏优化，单手操作友好。</p>
+        </div>
+        <div class="feature-card">
+            <span class="icon">📎</span>
+            <h3>锚点引导</h3>
+            <p>每个区块均提供自然衔接，不依赖弹窗与跳转，信息直给。</p>
+        </div>
+    </div>
+
+    <!-- 说明区 (双栏)  从稳定入口与页面说明的角度 -->
+    <section class="info-section">
+        <h2>关于页面结构与入口说明</h2>
+        <div class="info-two">
+            <div>
+                <p><strong>• 落地页设计</strong><br>
+                此页面以介绍与指引为核心，不包含复杂交互。所有内容围绕如何使用、如何找到对应资源展开。主站 <a href="https://cn-index-k1sports.com" class="inline-link">K1体育</a> 作为唯一推荐地址，直接嵌入在段落中，不额外使用按钮式文案。</p>
+                <p><strong>• 内容组织</strong><br>
+                从上至下依次为：hero 标识、优势要点、双栏说明、FAQ 摘要和页脚链接。这种模块化结构方便用户按需浏览，也便于后期补充更多说明条目。</p>
+            </div>
+            <div>
+                <div class="highlight">
+                    <p><strong>🔹 稳定入口的含义</strong><br>
+                    本页提及的「入口」指指向 <a href="https://cn-index-k1sports.com" class="inline-link">K1体育</a> 的直链，该链接经过校验且在当前页面中唯一。用户可以将其视为访问主站的固定路径，不受临时跳转或短链影响。</p>
+                    <p style="margin-top: 0.6rem;"><strong>🔹 页面说明的作用</strong><br>
+                    此介绍页聚合了常见的信息模块，相当于一份精简的「使用前参考」。尤其适合第一次接触网站结构、希望快速了解分区内容的访问者。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <section class="faq-summary">
+        <h2>❓ 常见问题摘要</h2>
+        <div class="faq-item">
+            <div class="faq-q">这个介绍页和主站是什么关系？</div>
+            <div class="faq-a">本页是独立的落地说明页，主要对 <a href="https://cn-index-k1sports.com" class="inline-link">K1体育</a> 进行入口说明和内容梳理，不替代主站功能。你可以把它看作一个索引或备用参考。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">页面中的链接是否长期有效？</div>
+            <div class="faq-a">指向 <a href="https://cn-index-k1sports.com" class="inline-link">K1体育</a> 的链接采用完整 https 路径，在域名解析正常时保持稳定。建议将主站加入浏览器书签以获得更直接的访问体验。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">为什么每个模块都使用卡片和网格？</div>
+            <div class="faq-a">卡片式布局在移动端阅读更舒适，也方便后续增加新的说明条目。蓝绿色点缀在保持统一视觉的同时避免了单调。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否有更多使用提示？</div>
+            <div class="faq-a">本页所有内容均为事实性整理，没有隐藏规则。如果你需要访问主站，直接点击段落中的 <a href="https://cn-index-k1sports.com" class="inline-link">K1体育</a> 链接即可，无需经过其他中间页。</div>
+        </div>
+    </section>
+
+    <!-- 底部链接 -->
+    <footer class="footer-links">
+        <a href="https://cn-index-k1sports.com">K1体育</a>
+        <a href="#">页面说明</a>
+        <a href="#">结构概览</a>
+        <a href="#">常见问题</a>
+    </footer>
+    <div class="copy-note">
+        基于网页结构的说明页 · 内容仅供参考
+    </div>
+
+</div>
+</body>
+</html>
