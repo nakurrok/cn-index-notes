@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 再会故事集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fce4b8 0%, #fbc2a0 50%, #f9d5a0 100%);
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            line-height: 1.7;
+            color: #3e2e20;
+        }
+
+        .story-card {
+            background: rgba(255, 253, 245, 0.92);
+            backdrop-filter: blur(4px);
+            max-width: 820px;
+            width: 100%;
+            border-radius: 42px;
+            padding: 2.8rem 2.4rem;
+            box-shadow: 0 20px 40px -12px rgba(150, 90, 40, 0.25),
+                        0 8px 24px rgba(220, 170, 110, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 开场短句 */
+        .opening {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #835e3b;
+            margin-bottom: 1.6rem;
+            border-left: 5px solid #e8b88a;
+            padding-left: 1.2rem;
+        }
+
+        .opening strong {
+            font-weight: 500;
+            color: #a86e42;
+        }
+
+        /* 承接段落 */
+        .bridge {
+            background: #fcf5ea;
+            border-radius: 28px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.4rem 0 2rem 0;
+            font-size: 1.02rem;
+            color: #4d3824;
+        }
+
+        .bridge a {
+            color: #b57345;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #eac9ad;
+            transition: border-color 0.25s, background 0.2s;
+            padding: 0 0.15rem;
+        }
+
+        .bridge a:hover {
+            border-bottom-color: #b57345;
+            background: #f6e3d1;
+            border-radius: 4px;
+        }
+
+        /* 特点列表 —— 小故事卡片风格 */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2rem 0 1.6rem 0;
+        }
+
+        .feature-item {
+            flex: 1 1 200px;
+            background: #faf3e9;
+            border-radius: 28px;
+            padding: 1.2rem 1.4rem;
+            box-shadow: inset 0 1px 2px rgba(255, 235, 200, 0.8), 0 4px 10px rgba(170, 120, 60, 0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+            border: 1px solid #f1dfcd;
+        }
+
+        .feature-item:hover {
+            background: #f8ede0;
+            box-shadow: 0 6px 14px rgba(170, 120, 60, 0.12);
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #7a5636;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #5f4531;
+        }
+
+        /* 温和结尾 + 收藏提示 */
+        .gentle-end {
+            margin-top: 2.2rem;
+            padding-top: 1.4rem;
+            border-top: 2px dashed #e5cfb8;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem 1rem;
+            font-size: 0.98rem;
+            color: #5e4530;
+        }
+
+        .gentle-end .tag {
+            display: inline-block;
+            background: #eddcca;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #6a4a2e;
+            letter-spacing: 0.02em;
+        }
+
+        .gentle-end .sign {
+            margin-left: auto;
+            font-style: italic;
+            color: #9a7a5e;
+            font-size: 0.95rem;
+        }
+
+        .gentle-end .sign::before {
+            content: "—— ";
+        }
+
+        /* FAQ 摘要风格 */
+        .faq-note {
+            background: #f3eee7;
+            border-radius: 100px 20px 20px 100px;
+            padding: 0.8rem 1.6rem;
+            margin: 1.8rem 0 0.2rem 0;
+            font-size: 0.92rem;
+            color: #5f4a36;
+            display: inline-block;
+        }
+
+        .faq-note span {
+            font-weight: 500;
+            background: #e6d3be;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            margin-right: 0.5rem;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddc8b0, transparent);
+            margin: 1.2rem 0;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .story-card {
+                padding: 1.8rem 1.2rem;
+                border-radius: 32px;
+            }
+            .opening {
+                font-size: 1.2rem;
+                padding-left: 1rem;
+            }
+            .features {
+                flex-direction: column;
+                gap: 0.9rem;
+            }
+            .feature-item {
+                flex: 1 1 auto;
+            }
+            .gentle-end {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .gentle-end .sign {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="story-card">
+        <!-- 开场短句：再次访问的意愿 -->
+        <div class="opening">
+            <strong>有些页面，</strong> 值得你再次打开浏览器标签。
+        </div>
+
+        <!-- 承接段落：收藏与持续关注 -->
+        <div class="bridge">
+            我发现自己总会下意识地翻看收藏夹里那个熟悉的条目——
+            <a href="https://portal-hub-igame.com">爱游戏</a>。
+            不是因为它多耀眼，而是那里总有一种刚刚好的氛围：不吵不闹，却有温度；
+            不频繁推送，却总能让人想起去坐一坐。久而久之，它成了我数字生活里一处安静的角落。
+        </div>
+
+        <!-- 特点列表：从“持续关注”角度展开 -->
+        <div class="features">
+            <div class="feature-item">
+                <h3>📌 收藏夹里的老朋友</h3>
+                <p>没有冗余的弹窗与推送，只有你记得时恰好出现的更新。像是书架上那本能随时翻开的旧书。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🔄 反复访问的理由</h3>
+                <p>每次回来，界面还是那么干净，内容却悄悄多了一点新意。不必从头适应，却有新鲜感可寻。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🌱 温和的持续感</h3>
+                <p>不刻意提醒“你多久没来了”，但当你主动点开，它依然用熟悉的节奏迎接你。这种默契很珍贵。</p>
+            </div>
+        </div>
+
+        <!-- 小场景：收藏夹截图般的描述 -->
+        <div style="background: #fcf3e6; border-radius: 24px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; font-size: 0.98rem; border-left: 4px solid #dfbc9a;">
+            <span style="font-weight: 500; color: #7a5636;">📂 我浏览器收藏栏里，</span>
+            给 <a href="https://portal-hub-igame.com" style="color: #b57345; text-decoration: underline 1px dotted #dbb594; text-underline-offset: 4px;">爱游戏</a> 单独建了一个文件夹。里面没有别的东西，就它一个。
+            偶尔清理收藏，鼠标悬停上去，犹豫两秒，还是舍不得删。大概这就是“持续关注”最朴素的形态吧。
+        </div>
+
+        <!-- FAQ 摘要：自然而克制的提示 -->
+        <div class="faq-note">
+            <span>💬 常见·碎语</span> 
+            “收藏的网站越来越多，但真正反复打开的有几个？”  —— 至少，这里是其中之一。
+        </div>
+
+        <!-- 温和结尾 + 收藏邀请 -->
+        <div class="gentle-end">
+            <span class="tag">📑 如果你也刚好路过</span>
+            <span>不妨把它放进收藏夹，留一扇随时可推开的门。</span>
+            <span class="sign">来自一个普通访客</span>
+        </div>
+
+        <!-- 隐性的再次访问提示 —— 不加链接文字，但再次用自然语句 -->
+        <hr>
+        <div style="text-align: right; font-size: 0.9rem; color: #9b7b60; margin-top: 0.8rem; letter-spacing: 0.02em;">
+            <span>🔖 记于某个想找回安静页面的午后</span>
+        </div>
+    </div>
+</body>
+</html>
